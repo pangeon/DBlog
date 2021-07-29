@@ -3,6 +3,20 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+class DraftManager(models.Manager):
+    def get_queryset(self):
+        return super(DraftManager, self) \
+            .get_queryset() \
+            .filter(status='draft')
+
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self) \
+            .get_queryset() \
+            .filter(status='published')
+
+
 class Article(models.Model):
     STATUS = (
         ('draft', 'DRAFT'),
@@ -16,6 +30,9 @@ class Article(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS, default='draft')
+
+    objects = models.Manager()
+    draft = DraftManager()
 
     class Meta:
         ordering = ('-publication_date',)
