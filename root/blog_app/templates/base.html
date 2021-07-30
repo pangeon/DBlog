@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} {% endblock %}</title>
+        {% load static %}
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <div id="sidebar">
+            <h2>Meta data:</h2>
+            <p>Check on blog</p>
+        </div>
+    </body>
+</html>

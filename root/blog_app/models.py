@@ -1,6 +1,8 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+
 
 
 class DraftManager(models.Manager):
@@ -18,6 +20,17 @@ class PublishedManager(models.Manager):
 
 
 class Article(models.Model):
+    def get_absolute_url(self):
+        return reverse(
+            'blog:article_details',
+            args=[
+                self.publication_date.year,
+                self.publication_date.strftime('%m'),
+                self.publication_date.strftime('%d'),
+                self.slug
+            ]
+        )
+
     STATUS = (
         ('draft', 'DRAFT'),
         ('published', 'PUBLISHED')
@@ -33,6 +46,7 @@ class Article(models.Model):
 
     objects = models.Manager()
     draft = DraftManager()
+    published = PublishedManager()
 
     class Meta:
         ordering = ('-publication_date',)
