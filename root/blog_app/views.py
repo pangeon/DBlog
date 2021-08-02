@@ -1,5 +1,9 @@
+import about as about
+import content as content
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views import View
 
 from .models import Article
 
@@ -46,3 +50,12 @@ def show_article_details(request, year, month, day, article):
             'article': article
         }
     )
+
+
+class InfoView(View):
+    def get(self, request):
+        print(request.headers)
+        return render(request, 'about.html', {
+            'agent': request.headers['User-Agent'],
+            'host': request.headers['Host']
+        })

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Info Page{% endblock %}
+
+{% block content %}
+    <h1 class="display-5 p-3 mb-2 bg-white text-dark text-center">Information about browser</h1>
+    <ul class="p-3 mb-2 bg-white text-dark">
+        <li><strong>User-Agent:</strong> {{ agent }}</li>
+        <li><strong>Host:</strong> {{ host }}</li>
+    </ul>
+{% endblock %}

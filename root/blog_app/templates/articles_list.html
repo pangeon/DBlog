@@ -3,17 +3,20 @@
 {% block title %}Blog{% endblock %}
 
 {% block content %}
-    <h1>Blog</h1>
+
+    <h1 class="display-1 p-3 mb-2 bg-white text-dark text-center">Blog</h1>
     {% for article in articles %}
-        <h2>
-            <a href="{{ article.get_absolute_url }}">
+        <h2 class="display-6">
+            <a class="p-2 mb-2 bg-transparent text-primary" href="{{ article.get_absolute_url }}">
                 {{ article.title }}
             </a>
         </h2>
-        <p class="date">
-            Publication date: {{ article.publication_date }} | author: {{ article.author }}
+        <p class="p-2 mb-2 bg-transparent text-dark">
+            <strong>
+                Publication date: {{ article.publication_date }} | author: {{ article.author }}
+            </strong>
         </p>
-        {{ article|truncatewords:30|linebreaks }}
+        <div class="p-2 mb-2 bg-transparent text-dark">{{ article.body|truncatewords:30|linebreaks }}</div>
     {% endfor %}
 {% include "pagination.html" with page=articles %}
 {% endblock %}

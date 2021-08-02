@@ -3,8 +3,8 @@
 {% block title %} {{ article.title }} {% endblock %}
 
 {% block content %}
-    <h1>{{ article.title }}</h1>
-    <p class="date">
+    <h1 class="display-1">{{ article.title }}</h1>
+    <p class="p-3 mb-4 bg-primary text-white">
         Publication date: {{ article.publication_date }} | author: {{ article.author }}
     </p>
     {{ article.body|linebreaks }}
