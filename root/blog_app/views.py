@@ -1,14 +1,31 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
 from .models import Article
 
 
+def _create_paginator(posts_on_site, collection):
+    paginator = Paginator(collection, posts_on_site)
+    return paginator
+
+
 def show_articles(request):
+    paginator = _create_paginator(3, Article.objects.all())
+    page = request.GET.get('page')
+
+    try:
+        articles = paginator.page(page)
+    except PageNotAnInteger:
+        articles = paginator.page(1)
+    except EmptyPage:
+        articles = paginator.page(page.num_pages)
+
     return render(
         request,
         'articles_list.html',
         {
-            'articles': Article.published.all()
+            'page': page,
+            'articles': articles
         }
     )
 

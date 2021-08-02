@@ -1,1 +1,12 @@
+{% extends "base.html" %}
 
+{% block title %} {{ article.title }} {% endblock %}
+
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    <p class="date">
+        Publication date: {{ article.publication_date }} | author: {{ article.author }}
+    </p>
+    {{ article.body|linebreaks }}
+    <a href="/" id="return-button">☚</a>
+{% endblock %}

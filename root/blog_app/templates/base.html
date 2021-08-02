@@ -6,6 +6,11 @@
         <link href="{% static 'css/main.css' %}" rel="stylesheet">
     </head>
     <body>
+        <nav>
+            <ul>
+                <li><a href="{% url 'admin:index' %}">Admin panel</a></li>
+            </ul>
+        </nav>
         <div id="content">
             {% block content %}
             {% endblock %}
